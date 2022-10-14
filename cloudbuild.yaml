@@ -16,13 +16,13 @@
 steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/ck-pre-sales-project/repo/myimage', '.']
+  args: ['build', '-t', 'gcr.io/ck-pre-sales-project/frontend', '.']
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/ck-pre-sales-project/repo/myimage']
+  args: ['push', 'gcr.io/ck-pre-sales-project/frontend']
 # Deploy container image to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'myservice', '--image', 'us-central1-docker.pkg.dev/ck-pre-sales-project/repo/myimage', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
+  args: ['beta' , 'run', 'deploy', 'frontend', '--image', 'gcr.io/ck-pre-sales-project/frontend', '--region', 'asia-southeast2', '--platform', 'managed', '--allow-unauthenticated']
 images:
-- us-central1-docker.pkg.dev/ck-pre-sales-project/repo/myimage
+- gcr.io/ck-pre-sales-project/frontend
 # [END cloudbuild_run_example_builddeploy]
